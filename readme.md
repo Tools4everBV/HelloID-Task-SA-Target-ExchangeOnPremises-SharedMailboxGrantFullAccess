@@ -1,4 +1,4 @@
-# #HelloID-Task-SA-Target-ExchangeOnPremises-SharedMailboxGrantFullAccess
+# HelloID-Task-SA-Target-ExchangeOnPremises-SharedMailboxGrantFullAccess
 
 ## Prerequisites
 Before using this snippet, verify you've met with the following requirements:
@@ -16,12 +16,12 @@ This code snippet executes the following tasks:
 ```json
 {
     "Users": ["JohnDoe", "JaneDoe"],
-    "Identity": "Mailbox"
+    "MailboxIdentity": "Mailbox"
 }
 ```
 
 > :exclamation: It is important to note that the names of your form fields might differ. Ensure that the `$formObject` hashtable is appropriately adjusted to match your form fields.
-> The **Identity** can hold different values [See the Microsoft Docs page](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxpermission?view=exchange-ps)
+> The **MailboxIdentity** can hold different values [See the Microsoft Docs page](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxpermission?view=exchange-ps)
 
 2. Constructs a PowerShell credential object from the supplied administrative username and password
 

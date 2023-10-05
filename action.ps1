@@ -4,7 +4,7 @@
 # Form mapping
 $formObject = @{
     Users    = $form.Users
-    Identity = $form.identity
+    MailboxIdentity = $form.MailboxIdentity
 }
 
 [bool]$IsConnected = $false
@@ -21,7 +21,7 @@ try {
         Write-Information "Executing ExchangeOnPremises action: [SharedMailboxGrantFullAccess] for: [$user]"
 
         $ParamsAddMailboxPermission = @{
-            Identity        = $formObject.Identity
+            Identity        = $formObject.MailboxIdentity
             User            = $user
             AccessRights    = "FullAccess"
             InheritanceType = "All"
@@ -32,13 +32,13 @@ try {
         $auditLog = @{
             Action            = 'UpdateResource'
             System            = 'ExchangeOnPremises'
-            TargetIdentifier  = $formObject.Identity
-            TargetDisplayName = $formObject.Identity
-            Message           = "ExchangeOnPremises action: [SharedMailboxGrantFullAccess][$($user)] to mailbox [$($formObject.Identity)] executed successfully"
+            TargetIdentifier  = $formObject.MailboxIdentity
+            TargetDisplayName = $formObject.MailboxIdentity
+            Message           = "ExchangeOnPremises action: [SharedMailboxGrantFullAccess][$($user)] to mailbox [$($formObject.MailboxIdentity)] executed successfully"
             IsError           = $false
         }
         Write-Information -Tags 'Audit' -MessageData $auditLog
-        Write-Information "ExchangeOnPremises action: [SharedMailboxGrantFullAccess][$($user)] to mailbox [$($formObject.Identity)] executed successfully"
+        Write-Information "ExchangeOnPremises action: [SharedMailboxGrantFullAccess][$($user)] to mailbox [$($formObject.MailboxIdentity)] executed successfully"
     }
 }
 catch {
@@ -46,13 +46,13 @@ catch {
     $auditLog = @{
         Action            = 'UpdateResource'
         System            = 'ExchangeOnPremises'
-        TargetIdentifier  = $formObject.Identity
-        TargetDisplayName = $formObject.Identity
-        Message           = "Could not execute Exchange action: [SharedMailboxGrantFullAccess] for: [$($formObject.Identity)], error: $($ex.Exception.Message)"
+        TargetIdentifier  = $formObject.MailboxIdentity
+        TargetDisplayName = $formObject.MailboxIdentity
+        Message           = "Could not execute Exchange action: [SharedMailboxGrantFullAccess] for: [$($formObject.MailboxIdentity)], error: $($ex.Exception.Message)"
         IsError           = $true
     }
     Write-Information -Tags 'Audit' -MessageData $auditLog
-    Write-Error "Could not execute Exchange action: [SharedMailboxGrantFullAccess] for: [$($formObject.Identity)], error: $($ex.Exception.Message)"
+    Write-Error "Could not execute Exchange action: [SharedMailboxGrantFullAccess] for: [$($formObject.MailboxIdentity)], error: $($ex.Exception.Message)"
 }
 finally {
     if ($IsConnected) {
